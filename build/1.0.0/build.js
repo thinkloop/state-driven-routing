@@ -1405,7 +1405,8 @@ exports.default = function (data, domElement) {
 		default:
 			page = _react2.default.createElement(_pageHome2.default, {
 				className: 'home-page',
-				siteHeader: data.siteHeader
+				siteHeader: data.siteHeader,
+				items: data.items
 			});
 			break;
 	}
@@ -1437,7 +1438,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./constants/pages":24,"./page-about":25,"./page-account":26,"./page-home":27}],24:[function(require,module,exports){
+},{"./constants/pages":24,"./page-about":26,"./page-account":27,"./page-home":28}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1448,6 +1449,64 @@ var ABOUT = exports.ABOUT = 'ABOUT';
 var ACCOUNT = exports.ACCOUNT = 'ACCOUNT';
 
 },{}],25:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _linkReact = require('link-react');
+
+var _linkReact2 = _interopRequireDefault(_linkReact);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Items = function Items(p) {
+	return _react2.default.createElement(
+		'ul',
+		{ className: (0, _classnames2.default)('items', p.className) },
+		!!p.items && p.items.map(function (item) {
+			return _react2.default.createElement(
+				'li',
+				{ key: item.id },
+				_react2.default.createElement(
+					_linkReact2.default,
+					{
+						className: (0, _classnames2.default)({ selected: item.isSelected }),
+						href: item.href,
+						onClick: item.onClick },
+					item.label
+				)
+			);
+		})
+	);
+};
+
+Items.propTypes = {
+	className: _react2.default.PropTypes.string,
+	items: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+		id: _react2.default.PropTypes.string,
+		label: _react2.default.PropTypes.string,
+		href: _react2.default.PropTypes.string,
+		isSelected: _react2.default.PropTypes.bool,
+		onClick: _react2.default.PropTypes.func
+	}))
+};
+
+exports.default = Items;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
+},{"classnames":1,"link-react":3}],26:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -1495,7 +1554,7 @@ exports.default = AboutPage;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./site-header":28,"classnames":1}],26:[function(require,module,exports){
+},{"./site-header":29,"classnames":1}],27:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -1543,7 +1602,7 @@ exports.default = AccountPage;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./site-header":28,"classnames":1}],27:[function(require,module,exports){
+},{"./site-header":29,"classnames":1}],28:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -1563,6 +1622,10 @@ var _siteHeader = require('./site-header');
 
 var _siteHeader2 = _interopRequireDefault(_siteHeader);
 
+var _items = require('./items');
+
+var _items2 = _interopRequireDefault(_items);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HomePage = function HomePage(p) {
@@ -1573,10 +1636,15 @@ var HomePage = function HomePage(p) {
 		_react2.default.createElement(
 			'main',
 			{ className: 'page-content' },
+			_react2.default.createElement(_items2.default, { items: p.items })
+		),
+		_react2.default.createElement(
+			'footer',
+			null,
 			_react2.default.createElement(
-				'p',
+				'em',
 				null,
-				'Home'
+				'check out console while clicking'
 			)
 		)
 	);
@@ -1584,14 +1652,15 @@ var HomePage = function HomePage(p) {
 
 HomePage.propTypes = {
 	className: _react2.default.PropTypes.string,
-	siteHeader: _react2.default.PropTypes.object
+	siteHeader: _react2.default.PropTypes.object,
+	items: _react2.default.PropTypes.array
 };
 
 exports.default = HomePage;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./site-header":28,"classnames":1}],28:[function(require,module,exports){
+},{"./items":25,"./site-header":29,"classnames":1}],29:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -1606,8 +1675,6 @@ var _react2 = _interopRequireDefault(_react);
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
-
-var _pages = require('./constants/pages');
 
 var _linkReact = require('link-react');
 
@@ -1627,7 +1694,7 @@ var SiteHeader = function SiteHeader(p) {
 					_linkReact2.default,
 					{
 						key: link.label,
-						className: (0, _classnames2.default)('link', { selected: link.isSelected }),
+						className: (0, _classnames2.default)({ 'selected': link.isSelected }),
 						href: link.href,
 						onClick: link.onClick },
 					link.label
@@ -1651,7 +1718,7 @@ exports.default = SiteHeader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./constants/pages":24,"classnames":1,"link-react":3}],29:[function(require,module,exports){
+},{"classnames":1,"link-react":3}],30:[function(require,module,exports){
 'use strict';
 
 var _store = require('./state/store');
@@ -1694,7 +1761,60 @@ window.onpopstate = function (e) {
 // read the url and navigate to the right page
 _store2.default.dispatch((0, _updateUrl2.default)(window.location.pathname + window.location.search));
 
-},{"./components/app":23,"./selectors/selectors":30,"./state/site/actions/update-url":34,"./state/store":39}],30:[function(require,module,exports){
+},{"./components/app":23,"./selectors/selectors":32,"./state/site/actions/update-url":38,"./state/store":43}],31:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.selectItem = exports.selectItems = undefined;
+
+exports.default = function () {
+	var _store$getState = _store2.default.getState();
+
+	var items = _store$getState.items;
+	var selectedItemID = _store$getState.selectedItemID;
+
+	return selectItems(items, selectedItemID);
+};
+
+var _memoizerific = require('memoizerific');
+
+var _memoizerific2 = _interopRequireDefault(_memoizerific);
+
+var _store = require('../../state/store');
+
+var _store2 = _interopRequireDefault(_store);
+
+var _paths = require('../../state/site/constants/paths');
+
+var _sections = require('../../state/site/constants/sections');
+
+var _updateUrl = require('../../state/site/actions/update-url');
+
+var _updateUrl2 = _interopRequireDefault(_updateUrl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var selectItems = exports.selectItems = (0, _memoizerific2.default)(10)(function (items, selectedItemID) {
+	return Object.keys(items).map(function (key) {
+		return selectItem(key, items[key].name, _paths.SECTIONS_PATHS[_sections.ITEM] + '/' + key, selectedItemID === key);
+	});
+});
+
+var selectItem = exports.selectItem = (0, _memoizerific2.default)(20)(function (id, label, href, isSelected) {
+	return {
+		id: id,
+		label: label,
+		href: href,
+		isSelected: isSelected,
+		onClick: function onClick() {
+			return _store2.default.dispatch((0, _updateUrl2.default)(href));
+		}
+	};
+});
+
+},{"../../state/site/actions/update-url":38,"../../state/site/constants/paths":39,"../../state/site/constants/sections":40,"../../state/store":43,"memoizerific":10}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1721,17 +1841,22 @@ var _siteHeader = require('./site/site-header');
 
 var _siteHeader2 = _interopRequireDefault(_siteHeader);
 
+var _items = require('./items/items');
+
+var _items2 = _interopRequireDefault(_items);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var selectors = {
 	selectedPage: _selectedPage2.default,
 	url: _url2.default,
-	siteHeader: _siteHeader2.default
+	siteHeader: _siteHeader2.default,
+	items: _items2.default
 };
 
 exports.default = (0, _combineSelectors2.default)(selectors, _store2.default.getState);
 
-},{"../state/store":39,"./site/selected-page":31,"./site/site-header":32,"./site/url":33,"combine-selectors":2}],31:[function(require,module,exports){
+},{"../state/store":43,"./items/items":31,"./site/selected-page":33,"./site/site-header":34,"./site/url":35,"combine-selectors":2}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1767,7 +1892,7 @@ var selectSelectedPage = exports.selectSelectedPage = (0, _memoizerific2.default
 	return PAGES[selectedSection];
 });
 
-},{"../../components/constants/pages":24,"../../state/store":39,"memoizerific":10}],32:[function(require,module,exports){
+},{"../../components/constants/pages":24,"../../state/store":43,"memoizerific":10}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1778,9 +1903,9 @@ exports.selectSiteHeaderLink = exports.selectSiteHeader = undefined;
 exports.default = function () {
 	var _store$getState = _store2.default.getState();
 
-	var selectedPage = _store$getState.selectedPage;
+	var selectedSection = _store$getState.selectedSection;
 
-	return selectSiteHeader(selectedPage);
+	return selectSiteHeader(selectedSection);
 };
 
 var _memoizerific = require('memoizerific');
@@ -1801,9 +1926,9 @@ var _updateUrl2 = _interopRequireDefault(_updateUrl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var selectSiteHeader = exports.selectSiteHeader = (0, _memoizerific2.default)(10)(function (selectedPage) {
+var selectSiteHeader = exports.selectSiteHeader = (0, _memoizerific2.default)(10)(function (selectedSection) {
 	return {
-		links: [selectSiteHeaderLink('Home', _paths.SECTIONS_PATHS[_sections.HOME], selectedPage === _sections.HOME), selectSiteHeaderLink('About', _paths.SECTIONS_PATHS[_sections.ABOUT], selectedPage === _sections.ABOUT), selectSiteHeaderLink('Account', _paths.SECTIONS_PATHS[_sections.ACCOUNT], selectedPage === _sections.ACCOUNT)]
+		links: [selectSiteHeaderLink('Home', _paths.SECTIONS_PATHS[_sections.HOME], selectedSection === _sections.HOME), selectSiteHeaderLink('About', _paths.SECTIONS_PATHS[_sections.ABOUT], selectedSection === _sections.ABOUT), selectSiteHeaderLink('Account', _paths.SECTIONS_PATHS[_sections.ACCOUNT], selectedSection === _sections.ACCOUNT)]
 	};
 });
 
@@ -1818,7 +1943,7 @@ var selectSiteHeaderLink = exports.selectSiteHeaderLink = (0, _memoizerific2.def
 	};
 });
 
-},{"../../state/site/actions/update-url":34,"../../state/site/constants/paths":35,"../../state/site/constants/sections":36,"../../state/store":39,"memoizerific":10}],33:[function(require,module,exports){
+},{"../../state/site/actions/update-url":38,"../../state/site/constants/paths":39,"../../state/site/constants/sections":40,"../../state/store":43,"memoizerific":10}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1839,7 +1964,69 @@ var _store2 = _interopRequireDefault(_store);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"../../state/store":39}],34:[function(require,module,exports){
+},{"../../state/store":43}],36:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+exports.default = function () {
+	var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultItems;
+	var action = arguments[1];
+
+	switch (action.type) {
+
+		default:
+			return items;
+	}
+};
+
+var _updateUrl = require('../../site/actions/update-url');
+
+var _sections = require('../../site/constants/sections');
+
+var _paths = require('../../site/constants/paths');
+
+var defaultItems = {
+	'id1': {
+		name: 'Item #1'
+	},
+	'id2': {
+		name: 'Item #2'
+	},
+	'id3': {
+		name: 'Item #3'
+	}
+};
+
+},{"../../site/actions/update-url":38,"../../site/constants/paths":39,"../../site/constants/sections":40}],37:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+exports.default = function () {
+	var selectedItem = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	var action = arguments[1];
+
+	switch (action.type) {
+
+		case _updateUrl.UPDATE_URL:
+			var parsedItemID = action.parsedURL.path.replace(_paths.SECTIONS_PATHS.ITEM + '/', '');
+			return parsedItemID !== action.parsedURL.path ? parsedItemID || null : null;
+
+		default:
+			return selectedItem;
+	}
+};
+
+var _updateUrl = require('../../site/actions/update-url');
+
+var _paths = require('../../site/constants/paths');
+
+},{"../../site/actions/update-url":38,"../../site/constants/paths":39}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1913,7 +2100,7 @@ function joinSearchParams(searchParams) {
 	return searchString.replace('?&', '?');
 }
 
-},{}],35:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1926,7 +2113,8 @@ var _sections = require('../../site/constants/sections');
 var PATHS_SECTIONS = exports.PATHS_SECTIONS = {
 	'/': _sections.HOME,
 	'/about': _sections.ABOUT,
-	'/account': _sections.ACCOUNT
+	'/account': _sections.ACCOUNT,
+	'/item': _sections.ITEM
 };
 var SECTIONS_PATHS = exports.SECTIONS_PATHS = Object.keys(PATHS_SECTIONS).reduce(function (p, key) {
 	p[PATHS_SECTIONS[key]] = key;return p;
@@ -1934,7 +2122,7 @@ var SECTIONS_PATHS = exports.SECTIONS_PATHS = Object.keys(PATHS_SECTIONS).reduce
 
 var DEFAULT_PATH = exports.DEFAULT_PATH = '/';
 
-},{"../../site/constants/sections":36}],36:[function(require,module,exports){
+},{"../../site/constants/sections":40}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1943,8 +2131,9 @@ Object.defineProperty(exports, "__esModule", {
 var HOME = exports.HOME = 'HOME';
 var ABOUT = exports.ABOUT = 'ABOUT';
 var ACCOUNT = exports.ACCOUNT = 'ACCOUNT';
+var ITEM = exports.ITEM = 'ITEM';
 
-},{}],37:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1971,7 +2160,7 @@ var _sections = require('../../site/constants/sections');
 
 var _paths = require('../../site/constants/paths');
 
-},{"../../site/actions/update-url":34,"../../site/constants/paths":35,"../../site/constants/sections":36}],38:[function(require,module,exports){
+},{"../../site/actions/update-url":38,"../../site/constants/paths":39,"../../site/constants/sections":40}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1996,7 +2185,7 @@ var _updateUrl = require('../../site/actions/update-url');
 
 var _paths = require('../../site/constants/paths');
 
-},{"../../site/actions/update-url":34,"../../site/constants/paths":35}],39:[function(require,module,exports){
+},{"../../site/actions/update-url":38,"../../site/constants/paths":39}],43:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2018,12 +2207,22 @@ var _selectedSection = require('./site/reducers/selected-section');
 
 var _selectedSection2 = _interopRequireDefault(_selectedSection);
 
+var _items = require('./items/reducers/items');
+
+var _items2 = _interopRequireDefault(_items);
+
+var _selectedItemId = require('./items/reducers/selected-item-id');
+
+var _selectedItemId2 = _interopRequireDefault(_selectedItemId);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // reducers
 var reducers = {
 	url: _url2.default,
-	selectedSection: _selectedSection2.default
+	selectedSection: _selectedSection2.default,
+	items: _items2.default,
+	selectedItemID: _selectedItemId2.default
 };
 
 // console log middleware that logs all actions to console
@@ -2051,5 +2250,5 @@ exports.default = (0, _redux.createStore)((0, _redux.combineReducers)(reducers),
 
 }).call(this,require('_process'))
 
-},{"./site/reducers/selected-section":37,"./site/reducers/url":38,"_process":11,"redux":18,"redux-thunk":12}]},{},[29])
+},{"./items/reducers/items":36,"./items/reducers/selected-item-id":37,"./site/reducers/selected-section":41,"./site/reducers/url":42,"_process":11,"redux":18,"redux-thunk":12}]},{},[30])
 //# sourceMappingURL=build.js.map

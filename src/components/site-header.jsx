@@ -1,8 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { HOME, ABOUT } from './constants/pages';
-
 import Link from 'link-react';
 
 const SiteHeader = (p) => (
@@ -11,7 +9,7 @@ const SiteHeader = (p) => (
 			{ !!p.links && p.links.map(link => (
 				<Link
 					key={ link.label }
-					className={ classnames('link', { selected: link.isSelected }) }
+					className={ classnames({ 'selected': link.isSelected }) }
 					href={ link.href }
 					onClick={ link.onClick }>
 						{ link.label }

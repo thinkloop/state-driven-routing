@@ -33,6 +33,7 @@ export default function (data, domElement) {
 		page = <HomePage
 			className="home-page"
 			siteHeader={ data.siteHeader }
+			items={ data.items }
 		/>;
 		break;
 	}

@@ -4,10 +4,14 @@ import thunk from 'redux-thunk';
 // reducers
 import url from './site/reducers/url';
 import selectedSection from './site/reducers/selected-section';
+import items from './items/reducers/items';
+import selectedItemID from './items/reducers/selected-item-id';
 
 const reducers = {
 	url,
-	selectedSection
+	selectedSection,
+	items,
+	selectedItemID
 };
 
 // console log middleware that logs all actions to console

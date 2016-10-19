@@ -7,16 +7,16 @@ import { HOME, ABOUT, ACCOUNT } from '../../state/site/constants/sections';
 import updateURL from '../../state/site/actions/update-url';
 
 export default function () {
-	const { selectedPage } = store.getState();
-	return selectSiteHeader(selectedPage);
+	const { selectedSection } = store.getState();
+	return selectSiteHeader(selectedSection);
 }
 
-export const selectSiteHeader = memoizerific(10)((selectedPage) => {
+export const selectSiteHeader = memoizerific(10)((selectedSection) => {
 	return {
 		links: [
-			selectSiteHeaderLink('Home', SECTIONS_PATHS[HOME], selectedPage === HOME),
-			selectSiteHeaderLink('About', SECTIONS_PATHS[ABOUT], selectedPage === ABOUT),
-			selectSiteHeaderLink('Account', SECTIONS_PATHS[ACCOUNT], selectedPage === ACCOUNT)
+			selectSiteHeaderLink('Home', SECTIONS_PATHS[HOME], selectedSection === HOME),
+			selectSiteHeaderLink('About', SECTIONS_PATHS[ABOUT], selectedSection === ABOUT),
+			selectSiteHeaderLink('Account', SECTIONS_PATHS[ACCOUNT], selectedSection === ACCOUNT)
 		]
 	};
 });

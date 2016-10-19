@@ -12,7 +12,50 @@
 
 	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
-	<style></style>
+	<style>
+		html, body, main, div, section, nav {
+			display: block; position: relative;
+		}
+
+		body {
+			color: #393939;
+			font-size: 18px;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		}
+
+		a {
+			color: #393939;
+		}
+
+		em {
+			color: #696969;
+			font-size: 0.8em;
+		}
+
+		.site-header a {
+			display: inline-block;
+			padding: 0.5em;
+			margin: 1px;
+			color: white;
+			background: #696969;
+			font-size: 1.3em;
+			text-decoration: none;
+		}
+
+		.site-header a.selected {
+			background: black;
+		}
+
+		.items a.selected {
+			color: blue;
+			font-weight: 700;
+		}
+
+		.items a.selected:after {
+			content: ' >> check out url';
+			font-weight: 400;
+		}
+	</style>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js" defer></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js" defer></script>
