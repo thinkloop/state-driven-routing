@@ -1,7 +1,7 @@
 {
   "name": "state-driven-routing",
   "version": "1.0.0",
-  "description": "State-driven routing with react, redux, selectors",
+  "description": "Implement routing without special dependencies or libraries.",
   "license": "MIT",
   "author": "Baz <baz@thinkloop.com>",
   "homepage": "https://github.com/thinkloop/state-driven-routing#readme",
