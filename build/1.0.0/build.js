@@ -1383,9 +1383,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (data, domElement) {
 	var page = void 0;
 
-	if (data.url !== window.location.pathname + window.location.search) {
-		window.history.pushState(null, null, data.url);
+	if (data.routing.url !== window.location.pathname + window.location.search) {
+		window.history.pushState(null, null, data.routing.url);
 	}
+	document.title = data.routing.title;
 
 	switch (data.selectedPage) {
 		case _pages.ABOUT:
@@ -1644,7 +1645,7 @@ var HomePage = function HomePage(p) {
 			_react2.default.createElement(
 				'em',
 				null,
-				'check out console while clicking'
+				'open the console while clicking'
 			)
 		)
 	);
@@ -1833,9 +1834,9 @@ var _selectedPage = require('./site/selected-page');
 
 var _selectedPage2 = _interopRequireDefault(_selectedPage);
 
-var _url = require('./site/url');
+var _routing = require('./site/routing');
 
-var _url2 = _interopRequireDefault(_url);
+var _routing2 = _interopRequireDefault(_routing);
 
 var _siteHeader = require('./site/site-header');
 
@@ -1849,14 +1850,52 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var selectors = {
 	selectedPage: _selectedPage2.default,
-	url: _url2.default,
+	routing: _routing2.default,
 	siteHeader: _siteHeader2.default,
 	items: _items2.default
 };
 
 exports.default = (0, _combineSelectors2.default)(selectors, _store2.default.getState);
 
-},{"../state/store":43,"./items/items":31,"./site/selected-page":33,"./site/site-header":34,"./site/url":35,"combine-selectors":2}],33:[function(require,module,exports){
+},{"../state/store":43,"./items/items":31,"./site/routing":33,"./site/selected-page":34,"./site/site-header":35,"combine-selectors":2}],33:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.selectTitle = exports.selectRouting = undefined;
+
+exports.default = function () {
+	var _store$getState = _store2.default.getState();
+
+	var url = _store$getState.url;
+	var selectedSection = _store$getState.selectedSection;
+
+	return selectRouting(url, selectedSection);
+};
+
+var _memoizerific = require('memoizerific');
+
+var _memoizerific2 = _interopRequireDefault(_memoizerific);
+
+var _store = require('../../state/store');
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var selectRouting = exports.selectRouting = (0, _memoizerific2.default)(1)(function (url, selectedSection) {
+	return {
+		url: url,
+		title: selectTitle(selectedSection)
+	};
+});
+
+var selectTitle = exports.selectTitle = (0, _memoizerific2.default)(1)(function (selectedSection) {
+	return selectedSection + ' - State-Driven Routing';
+});
+
+},{"../../state/store":43,"memoizerific":10}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1892,7 +1931,7 @@ var selectSelectedPage = exports.selectSelectedPage = (0, _memoizerific2.default
 	return PAGES[selectedSection];
 });
 
-},{"../../components/constants/pages":24,"../../state/store":43,"memoizerific":10}],34:[function(require,module,exports){
+},{"../../components/constants/pages":24,"../../state/store":43,"memoizerific":10}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1943,28 +1982,7 @@ var selectSiteHeaderLink = exports.selectSiteHeaderLink = (0, _memoizerific2.def
 	};
 });
 
-},{"../../state/site/actions/update-url":38,"../../state/site/constants/paths":39,"../../state/site/constants/sections":40,"../../state/store":43,"memoizerific":10}],35:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-exports.default = function () {
-	var _store$getState = _store2.default.getState();
-
-	var url = _store$getState.url;
-
-	return url;
-};
-
-var _store = require('../../state/store');
-
-var _store2 = _interopRequireDefault(_store);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-},{"../../state/store":43}],36:[function(require,module,exports){
+},{"../../state/site/actions/update-url":38,"../../state/site/constants/paths":39,"../../state/site/constants/sections":40,"../../state/store":43,"memoizerific":10}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

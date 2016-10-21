@@ -13,7 +13,7 @@ const HomePage = (p) => (
 		</main>
 
 		<footer>
-			<em>check out console while clicking</em>
+			<em>open the console while clicking</em>
 		</footer>
 	</div>
 );

@@ -10,9 +10,10 @@ import AccountPage from './page-account';
 export default function (data, domElement) {
 	let page;
 
-	if (data.url !== window.location.pathname + window.location.search) {
-		window.history.pushState(null, null, data.url);
+	if (data.routing.url !== window.location.pathname + window.location.search) {
+		window.history.pushState(null, null, data.routing.url);
 	}
+	document.title = data.routing.title;
 
 	switch(data.selectedPage) {
 	case ABOUT:

@@ -2,13 +2,13 @@ import combineSelectors from 'combine-selectors';
 import store from '../state/store';
 
 import selectedPage from './site/selected-page';
-import url from './site/url';
+import routing from './site/routing';
 import siteHeader from './site/site-header';
 import items from './items/items';
 
 const selectors = {
 	selectedPage,
-	url,
+	routing,
 	siteHeader,
 	items
 };
