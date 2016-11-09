@@ -1,5 +1,5 @@
 # State-driven routing with react, redux, selectors
-See the related post: http://www.thinkloop.com/article/state-driven-routing-react-redux-selectors/
+See the related post: [State-Driven Routing with React, Redux, Selectors](http://www.thinkloop.com/article/state-driven-routing-react-redux-selectors/)
 
 ## Install
 
