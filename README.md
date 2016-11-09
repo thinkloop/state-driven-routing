@@ -17,4 +17,4 @@ Released under an MIT license.
 - [extreme decoupling todo app](https://github.com/thinkloop/todo-app/): Example todo app of extreme decoupling of react, redux and selectors
 - [memoizerific](https://github.com/thinkloop/memoizerific/): Fast, small, efficient JavaScript memoization to memoize JS functions
 
-## Like it? Star It
+#### Like it? Star It
